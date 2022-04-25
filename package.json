@@ -11,8 +11,10 @@
   "author": "group 3",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "mongoose": "^6.3.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pusher": "^5.1.0-beta"
   }
 }
