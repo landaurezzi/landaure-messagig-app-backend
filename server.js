@@ -54,8 +54,11 @@ db.once("open", () => {
 })
 app.get("/", (req, res) => res.status(200).send("Hello TheWebDev"))
 
+
+
 app.post('/messages/new', (req, res) => {
     const dbMessage = req.body
+    console.log("Sending message to room", req.body.roomID)
     Messages.create(dbMessage, (err, data) => {
         if(err){
         res.status(500).send(err)
@@ -67,14 +70,29 @@ app.post('/messages/new', (req, res) => {
 })
 
 app.get('/messages/sync', (req, res) => {
-    Messages.find((err, data) => {
-        if(err){
-            res.status(500).send(err)
-        }
-        else{
-            res.status(200).send(data)
-        }
-    })
+    if (req.query.room == "1") {
+        console.log("getting room 1 messages")
+        Messages.find({roomID:"1"},(err, data) => {
+            if(err){
+                res.status(500).send(err)
+            }
+            else{
+                res.status(200).send(data)
+            }
+        })
+    }
+    else if (req.query.room == "2") {
+        console.log("getting room 2 messages")
+        Messages.find({roomID:"2"},(err, data) => {
+            if(err){
+                res.status(500).send(err)
+            }
+            else{
+
+                res.status(200).send(data)
+            }
+        })
+    }
 })
 
 //Listener
